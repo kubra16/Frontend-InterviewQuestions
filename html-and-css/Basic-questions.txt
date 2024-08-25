@@ -1,0 +1,13 @@
+1. Difference between innerText , innerHtml and textContent.
+    getinnerText(): Retrives the text content of the paragraph as it appears to the user, ignoring any hiddden elements and taking into account of styling.
+    getInnerHtml() : Retrives the HTML content inside the paragraph , including the HTML tags.
+    gettextContent() : Retrives the raw text content of paragraph , including the text elements and without formatting.
+
+2. What is data Attibutes and why do we use ?
+    A data Attribute is custom attribute in Html that allows us to store additional information fon the HTML element. This information can be used in js and css.
+    They are usefull for passing data between HTML and js in clean and semantic way.
+
+3. Diffrence between loading lazy and loading eager on img tag?
+    In eager loading the img is loaded immediately when a HTML page is rendered.
+    In Lazy Loading the img is loaded based on certain conditions.
+    
