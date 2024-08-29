@@ -80,3 +80,54 @@ async function processOrder() {
   }
 }
 processOrder();
+
+// Create 2 mock API’s which returns a list of students and each student has a name, some marks and a unique registration ID. Data from the 2 API’s can have common students i.e. mock API 1 can have a student as — ABC / 98% / 1234 (name / marks / registration ID) and this same data can be there in mock API 2 response as well. Now after creating these 2 API’s using Promises and hard-coded data, you need to merge the data coming from both API’s and have to delete the duplicates.
+
+function mockApi1() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve([
+        { name: "Alice", marks: "95%", regId: 1234 },
+        { name: "Bob", marks: "90%", regId: 2345 },
+        { name: "Charlie", marks: "85%", regId: 3456 },
+      ]);
+    }, 1000);
+  });
+}
+
+function mockApi2() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve([
+        { name: "Alice", marks: "95%", regId: 1234 }, // duplicate
+        { name: "David", marks: "80%", regId: 4567 },
+        { name: "Eve", marks: "88%", regId: 5678 },
+      ]);
+    }, 1000);
+  });
+}
+
+function fetchstudent() {
+  return Promise.all([mockApi1(), mockApi2()]);
+}
+
+function removeDublicates(data1, data2) {
+  let mergedStudents = [...data1, ...data2];
+  console.log(mergedStudents);
+
+  let uniqueStudents = [];
+  const studentMap = new Map();
+
+  mergedStudents.forEach((student) => {
+    if (!studentMap.has(student.regId)) {
+      studentMap.set(student.regId, student);
+      uniqueStudents.push(student);
+    }
+  });
+  return uniqueStudents;
+}
+
+fetchstudent().then(([data1, data2]) => {
+  const result = removeDublicates(data1, data2);
+  console.log(result);
+});
